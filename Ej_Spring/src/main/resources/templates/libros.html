@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <title>Nuestros Libros</title>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <a class="navbar-brand" href="/">Librería Egg</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/libro/registro">Registrar Libro<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/autor/registro">Registrar Autor</a>
+                </li>                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-toggle="dropdown" aria-expanded="false">
+                        Ver más
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Editoriales</a>
+                        <a class="dropdown-item" href="#">Acerca de nosotros</a>
+                        <a class="dropdown-item" href="#">Consultas</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div>
+        <h1>Nuestros libros</h1>
+    </div>
+
+    <div >
+       <!-- <p th:if="${error = null}" style="color: greenyellow;" > Éxito </p> -->
+        <table class="table table-striped" >
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">ISBN</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Año</th>
+                    <th scope="col">Autor</th>
+                    <th scope="col">Ejemplares disponibles</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody th:each= "libro : ${libros}">
+                <tr>
+                    <th scope="row" th:text="${libro.id}"></th>
+                    <td th:text="${libro.ISBN}"></td>
+                    <td th:text="${libro.titulo}"></td>
+                    <td th:text="${libro.year}"></td>
+                    <td th:text="${libro.autor.nombre}"></td>
+                    <td th:text="${libro.ejemplaresRestantes}"></td>  
+                    <td><a th:href="@{/libro/prestamo/__${libro.id}__}"><button th:if="${libro.alta}"  type="button" class="btn btn-warning" >Pedir</button></a></td>
+                    <td>
+                        <a th:href="@{/libro/alta/__${libro.id}__}"><button th:if="${libro.alta}" type="button" class="btn btn-danger" >Dar de baja</button></a>
+                        <a th:href="@{/libro/alta/__${libro.id}__}"><button th:unless="${libro.alta}" type="button" class="btn btn-success" >Dar de alta</button></a>
+                        <a th:href="@{/libro/modificar/__${libro.id}__}"><button type="button" class="btn btn-primary" >Modificar</button></a>
+                    </td> 
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+
+    
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+        crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+h1{
+   font-family: fantasy;
+   color: greenyellow;  
+   align-items: center;  
+}
+
+.contenedor{
+    height: 400px;
+    width: 100%;
+   background-color: darkgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
